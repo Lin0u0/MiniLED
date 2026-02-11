@@ -1,4 +1,13 @@
+//===================================================================================
+// MiniLED 分区背光控制器管脚约束
+// 高云 GW2A-LV55PG484C8/I7 (BGA484)
+// 
+// 控制方案:
+//   - 拨码开关 SW1/SW2: 控制背光功能 (分区背光/自动亮度)
+//   - 按键 KEY1-4: 控制算法模式 (RMS/Max/Ave/Cor)
+//===================================================================================
 
+// LVDS TX 输出 (到 LCD 屏幕)
 IO_LOC "O_dout_p[3]" C18,C19;
 IO_PORT "O_dout_p[3]" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=2.5;
 IO_LOC "O_dout_p[2]" A17,B17;
@@ -9,6 +18,8 @@ IO_LOC "O_dout_p[0]" A22,B22;
 IO_PORT "O_dout_p[0]" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=2.5;
 IO_LOC "O_clkout_p" C9,C10;
 IO_PORT "O_clkout_p" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=2.5;
+
+// LVDS RX 输入 (从信号源)
 IO_LOC "I_din_p[3]" A2,A3;
 IO_PORT "I_din_p[3]" IO_TYPE=LVDS25 PULL_MODE=NONE BANK_VCCIO=2.5;
 IO_LOC "I_din_p[2]" B6,A6;
@@ -19,8 +30,14 @@ IO_LOC "I_din_p[0]" A11,A12;
 IO_PORT "I_din_p[0]" IO_TYPE=LVDS25 PULL_MODE=NONE BANK_VCCIO=2.5;
 IO_LOC "I_clkin_p" A15,B15;
 IO_PORT "I_clkin_p" IO_TYPE=LVDS25 PULL_MODE=NONE BANK_VCCIO=2.5;
+
+// I2C 光线传感器 (AP3216C)
 IO_LOC "scl" F22;
 IO_PORT "scl" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
+IO_LOC "sda" E22;
+IO_PORT "sda" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
+
+// SPI7001 LED 驱动接口
 IO_LOC "scan4" C21;
 IO_PORT "scan4" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
 IO_LOC "scan3" B21;
@@ -37,6 +54,10 @@ IO_LOC "DCLK" C20;
 IO_PORT "DCLK" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
 IO_LOC "LE" N19;
 IO_PORT "LE" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
+
+// LED 指示灯
+// LED3: 分区背光状态, LED2: 自动亮度状态
+// LED1:0: 算法模式 (00=RMS, 01=Max, 10=Ave, 11=Cor)
 IO_LOC "O_led[3]" T17;
 IO_PORT "O_led[3]" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
 IO_LOC "O_led[2]" U17;
@@ -45,20 +66,30 @@ IO_LOC "O_led[1]" U19;
 IO_PORT "O_led[1]" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
 IO_LOC "O_led[0]" U18;
 IO_PORT "O_led[0]" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
-IO_LOC "sda" E22;
-IO_PORT "sda" IO_TYPE=LVCMOS25 PULL_MODE=UP DRIVE=8 BANK_VCCIO=2.5;
-IO_LOC "led_mode[1]" V20;
-IO_PORT "led_mode[1]" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
-IO_LOC "led_mode[0]" W20;
-IO_PORT "led_mode[0]" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
-IO_LOC "cor_mode" T18;
-IO_PORT "cor_mode" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
-IO_LOC "ave_mode" R18;
-IO_PORT "ave_mode" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
-IO_LOC "max_mode" U20;
-IO_PORT "max_mode" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
-IO_LOC "rms_mode" P18;
-IO_PORT "rms_mode" IO_TYPE=LVCMOS25 PULL_MODE=UP BANK_VCCIO=2.5;
+
+// 拨码开关 - 控制背光功能 (BANK_3, 1.5V, 低电平有效)
+// SW1: 分区背光开关 (0=开启, 1=关闭)
+// SW2: 自动亮度开关 (0=开启, 1=关闭)
+IO_LOC "sw_zonal_en" W20;
+IO_PORT "sw_zonal_en" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+IO_LOC "sw_auto_bright" V20;
+IO_PORT "sw_auto_bright" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+
+// 按键 - 控制算法模式 (BANK_3, 1.5V, 低电平有效，带消抖)
+// KEY1: RMS 算法
+// KEY2: Max 算法
+// KEY3: Ave 算法
+// KEY4: Cor 算法
+IO_LOC "key_rms" T18;
+IO_PORT "key_rms" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+IO_LOC "key_max" R18;
+IO_PORT "key_max" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+IO_LOC "key_ave" U20;
+IO_PORT "key_ave" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+IO_LOC "key_cor" T20;
+IO_PORT "key_cor" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
+
+// 系统时钟和复位
 IO_LOC "I_rst_n" AB3;
 IO_PORT "I_rst_n" IO_TYPE=LVCMOS15 PULL_MODE=UP BANK_VCCIO=1.5;
 IO_LOC "I_clk" M19;

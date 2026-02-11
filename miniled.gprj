@@ -23,6 +23,7 @@
         <File path="src/lvds_7to1_tx/ip_gddr71tx.v" type="file.verilog" enable="1"/>
         <File path="src/lvds_7to1_tx/lvds_7to1_tx_defines.v" type="file.verilog" enable="1"/>
         <File path="src/lvds_7to1_tx/lvds_7to1_tx_top.v" type="file.verilog" enable="1"/>
+        <File path="src/utils/key_debounce.v" type="file.verilog" enable="1"/>
         <File path="src/miniled_top.v" type="file.verilog" enable="1"/>
         <File path="src/ramflag_In.v" type="file.verilog" enable="1"/>
         <File path="src/sram_top_gowin_top_sim.v" type="file.verilog" enable="1"/>
