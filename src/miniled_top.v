@@ -16,6 +16,7 @@ module miniled_top
     input  			max_mode	,
 	input  			ave_mode	,
 	input  			cor_mode	,
+	input  			rms_mode	,	// RMS 算法模式
     // LED 灯板控制
 	output          LE          ,
     output          DCLK        , //12.5M
@@ -80,7 +81,9 @@ wire [7:0] bright_data;
         if(!I_rst_n) 
         gray_mode<=1;
         else begin 
-            if(!max_mode)
+            if(!rms_mode)				// RMS 模式 (2'b00) - 新增
+                gray_mode<='d0;
+            else if(!max_mode)
                 gray_mode<='d1;
             else if(!ave_mode)			
                 gray_mode<='d2;

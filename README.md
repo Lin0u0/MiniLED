@@ -65,7 +65,8 @@ Video Input (LVDS) → LVDS RX → RGB to Gray → Backlight Algorithm → LED D
 
 2. **360-Zone Backlight Algorithm** (`block_360_pro.v`)
    - Partitions 1280×800 display into 360 zones (53×53 pixels per zone)
-   - Three selectable modes via `gray_mode`:
+   - Four selectable modes via `gray_mode`:
+     - **Mode 00** (RMS): Root Mean Square algorithm for high-contrast scenes
      - **Mode 01** (default): Mean-corrected maximum with 6-frame temporal smoothing
      - **Mode 10**: Maximum value per zone
      - **Mode 11**: Correction based on max-average difference
@@ -123,9 +124,10 @@ Video Input (LVDS) → LVDS RX → RGB to Gray → Backlight Algorithm → LED D
 
 | Signal | Description |
 |--------|-------------|
-| max_mode | Select maximum algorithm |
-| ave_mode | Select average algorithm |
-| cor_mode | Select correction algorithm |
+| rms_mode | Select RMS algorithm (Mode 00) - **New** |
+| max_mode | Select maximum algorithm (Mode 01) |
+| ave_mode | Select average algorithm (Mode 02) |
+| cor_mode | Select correction algorithm (Mode 03) |
 | led_mode[1:0] | LED display mode (00=Full, 01=Half-screen, 10=Zonal+Auto, 11=Zonal) |
 | O_led[3:0] | Mode indicator LEDs |
 
