@@ -1,0 +1,206 @@
+# =============================================================================
+# macOS
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.icloud
+
+# =============================================================================
+# AI / IDE / Editors
+# =============================================================================
+# Cursor
+.cursorrules
+.cursor/
+
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+.netrwhist
+[._]*.un~\n
+# Emacs
+*~
+#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# =============================================================================
+# FPGA / EDA Tools
+# =============================================================================
+# Gowin IDE
+impl/
+sim/
+*.gprj.user
+*.gprj.bak
+*.gwsyn
+*.gwsyn.bak
+*.gwtim
+*.gwtim.bak
+*.gwpgp
+*.gwpgp.bak
+*.gwpga
+*.gwpga.bak
+*.gwpgs
+*.gwpgs.bak
+*.gwsim
+*.gwsim.bak
+*.gwcfg
+*.gwcfg.bak
+*.gwlog
+*.gwlog.bak
+
+# Generic EDA
+tmp/
+temp/
+*.log
+*.jou
+*.str
+*.wdb
+*.vcd
+*.fst
+*.ghw
+
+# Synthesis outputs
+*.bit
+*.bin
+*.mcs
+*.hex
+*.rbt
+*.prm
+
+# Simulation
+*.vvp
+*.vpi
+obj_dir/
+csrc/
+uvmtb/
+
+# =============================================================================
+# Python (for AI tools / scripts)
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# =============================================================================
+# Node.js (for AI web tools)
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# =============================================================================
+# AI Model Files (large binaries)
+# =============================================================================
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.gguf
+*.bin
+*.params
+models/
+checkpoints/
+weights/
+
+# =============================================================================
+# General
+# =============================================================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.diff
+*.patch
+.cache/
+*.lock
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
